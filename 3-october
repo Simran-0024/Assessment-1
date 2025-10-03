@@ -1,0 +1,140 @@
+## BINARY SEARCH
+1).
+374. Guess Number Higher or Lower
+
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        int low=1; int high=n;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            int ans=guess(mid);
+            if(ans==0){
+                return mid;
+            }
+            else if(ans==1){
+                low=mid+1;
+            }
+            else if(ans==-1){
+                high=mid-1;
+            }
+        }
+        
+        return -1;
+    }
+}
+
+
+2).
+34. Find First and Last Position of Element in Sorted Array
+
+class Solution {
+    public int[] searchRange(int[] arr, int x) {
+        int fis=firstEle(arr,x);
+        int last=lastEle(arr,x);
+        return new int[]{fis, last};
+        
+    }
+    public int firstEle(int[] arr, int x){
+
+        int low=0; int high=arr.length-1;
+        int ans=-1;
+         while (low<=high){
+            int mid=(low+high)/2;
+            if(arr[mid]==x){
+                ans=mid;
+                high=mid-1;
+            }
+            
+            else if (arr[mid]<x){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+         }
+         return ans;
+
+    }
+    public int lastEle(int[] arr, int x){
+
+        int low=0; int high=arr.length-1;
+        int ans=-1;
+         while (low<=high){
+            int mid=(low+high)/2;
+            if(arr[mid]==x){
+                ans=mid;
+                low=mid+1;
+            }
+            
+            else if (arr[mid]<x){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+                
+            }
+         }
+         return ans;
+
+    }
+}
+
+
+
+3).
+
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int ans=0;
+        int largest=Integer.MIN_VALUE;
+        for (int i=0; i<arr.length; i++){
+            if(arr[i]>largest){
+                largest=arr[i];
+                ans=i;
+            }
+        }
+        return ans;
+        
+    }
+}
+
+4).852. Peak Index in a Mountain Array
+33. Search in Rotated Sorted Array
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int low=0;
+        int high=nums.length-1;
+        int ans=nums.length;
+        while (low<=high){
+            int mid= low+(high-low)/2;
+            if(nums[mid]==target){
+                return mid;
+        
+            }
+            // thinking the left half is sortd
+            if(nums[low]<=nums[mid]){
+                if(target>=nums[low]&& target<=nums[mid]){
+                     high=mid-1;
+                }
+                else{
+                    low=mid+1;
+                }
+            }
+            else {
+                if(target<=nums[high]&& target>=nums[mid]){
+                    low=mid+1;
+                }
+                else{
+                    high=mid-1;
+                    
+                }
+            }
+        }
+        return -1;
+            
+
+
+    }
+}
+
